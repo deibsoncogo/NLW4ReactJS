@@ -4,11 +4,11 @@ export function ExperienceBar() {
       <span>0 xp</span>
       <div>
         {/* O width FAZ A DIV OCUPAR UMA PORCENTAGEM DA OUTRA DIV */}
-        <div style={{width: "50%"}}></div>
+        <div style={{ width: "50%" }} />
 
-        <span className="current-experience" style={{left: "50%"}}>300 xp</span>
+        <span className="current-experience" style={{ left: "50%" }}>300 xp</span>
       </div>
       <span>600 xp</span>
     </header>
-  )
+  );
 }

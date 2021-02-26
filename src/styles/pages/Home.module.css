@@ -1,0 +1,18 @@
+.container {
+  height: 100vh; /* faz ter o tamanho exato máximo de altura */
+  max-width: 992px; /* tamanho máximo */
+  margin: 0 auto; /* faz centralizar tudo */
+  padding: 2.5rem 2rem; /* margem de espaço */
+
+  display: flex; /* ativa o flex box para este modo */
+  flex-direction: column; /* faz os demais itens ficar um embaixo do outro */
+}
+
+.container section {
+  flex: 1;
+
+  display: grid; /* ativa o flex box para este modo */
+  grid-template-columns: 1fr 1fr; /* cria duas colunas neste tamanho */
+  gap: 6.25rem; /* cria um espaçamento entre as colunas */
+  align-content: center; /* alinha os componentes verticalmente */
+}

@@ -1,0 +1,30 @@
+.experienceBar {
+  display: flex; /* ATIVA O FLEX BOX */
+  align-items: center; /* ALINHA VERTICALMENTE */
+}
+
+.experienceBar span {
+  font-size: 1rem; /* TAMANHO DO TEXTO */
+}
+
+/* O SINAL DE > FAZ SELECIONAR SOMENTE A PRIMEIRA div*/
+.experienceBar > div {
+  flex: 1; /* FAZ OCUPAR A LARGURA MAXIMA DO CONTÊINER */
+  height: 4px; /* ALTURA */
+  border-radius: 4px; /* BORDA */
+  background: var(--gray-line); /* COR  DE FUNDO */
+  margin: 0 1.5rem;
+  position: relative; /* O ELEMENTO E POSICIONADO CONFORME OS DEMAIS ITENS (FLUXO) */
+}
+
+.experienceBar > div > div {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--green);
+}
+
+span.currentExperience {
+  position: absolute; /* REMOVE O RELACIONAMENTO COM OS DEMAIS ITENS (FLUXO) */
+  top: 12px; /* MARGEM SUPERIOR */
+  transform: translate(-50%); /* DESLOCA O ITEM */
+}

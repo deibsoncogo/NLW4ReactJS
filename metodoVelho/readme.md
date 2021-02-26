@@ -57,11 +57,3 @@ Para executar o servidor devemos usar outro comando ou seu atalho, temos também
 yarn next dev
 yarn dev
 ````
-
-No Next não podemos mexer diretamente no arquivo index.html que fica na pasta public, aqui ele nem aparece para nos, com isso temos que criar um arquivo chamado de `_document.tsx` e dentro dele criar um index que vai sobre escrever o original
-
-Tudo que está dentro do `_document.tsx` é carregado somente uma vez e no `_app.tsx` e carregado somente oque o usuário precisa quando muda de página
-
-Ele vem com o `CSS Models` onde ele vai fazer o CSS ficar disponível somente para um componente
-
->23/02/2021

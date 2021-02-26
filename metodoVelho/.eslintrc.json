@@ -22,16 +22,10 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "object-curly-newline": ["error", "never"],
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
-    "import/prefer-default-export": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "max-len": ["error", {
-      "code": 101,
-      "ignoreComments": true,
-      "ignoreUrls": true
-    }],
+    "import/prefer-default-export": "off",
     "quotes": ["error", "double"],
     "linebreak-style": ["error", "windows"],
     "react-hooks/rules-of-hooks": "error",

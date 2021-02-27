@@ -30,7 +30,7 @@ Existe vários tipos de medida dentro do CSS onde o `px` é o menos recomendáve
 
 >22/02/2021
 
-## Aula 02 - Aula 02 - Desvendando o Next JS
+## Aula 02 - Desvendando o Next JS
 >Nesse segundo dia vamos aprender o que é Next.js e quando utilizar no desenvolvimento de aplicações React. Vamos também criar nossos próprios hooks dando vida às funcionalidades de countdown e ganho de experiência e leveis através de desafios
 
 O **Next JS** é um firmware do React onde com ele conseguimos criar um projeto que consegue lidar com algumas ferramentas incríveis automaticamente como o SSR e SSG
@@ -74,3 +74,5 @@ No CSS temos o `filter` que modifica alguns itens da cor como seu brilho
 Criar um arquivo para cada item da nova aplicação é muito bom pois deixar a tela limpa e isola dos demais itens, mais este isolamento complica nossa vida quando precisamos que um item em um arquivo ative outra coisa no outro arquivo
 
 Para solucionar o problema acima temos a `API de contextos do React`, isso serve para criar um ponto de comunicação entre vários componentes da nossa aplicação
+
+>24/02/2021

@@ -65,3 +65,12 @@ Tudo que está dentro do `_document.tsx` é carregado somente uma vez e no `_app
 Ele vem com o `CSS Models` onde ele vai fazer o CSS ficar disponível somente para um componente
 
 >23/02/2021
+
+## Aula 03 - Contexto e componentes
+>Na terceiro aula realizaremos uma separação da aplicação em componentes menores e aplicaremos o conceito de contextos no React, responsável por compartilhar uma informação entre vários componentes em tela, finalizaremos também a funcionalidade de desafios
+
+No CSS temos o `filter` que modifica alguns itens da cor como seu brilho
+
+Criar um arquivo para cada item da nova aplicação é muito bom pois deixar a tela limpa e isola dos demais itens, mais este isolamento complica nossa vida quando precisamos que um item em um arquivo ative outra coisa no outro arquivo
+
+Para solucionar o problema acima temos a `API de contextos do React`, isso serve para criar um ponto de comunicação entre vários componentes da nossa aplicação

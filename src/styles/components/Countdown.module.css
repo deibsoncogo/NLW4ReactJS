@@ -61,6 +61,23 @@
   transition: background-color 0.2s; /* cria um atraso para trocar de cor */
 }
 
-.countdownButton:hover {
+/* ativa o hover se o botão não estiver desabilitado */
+.countdownButton:not(:disabled):hover {
   background: var(--blue-dark);
+}
+
+.countdownButtonActive {
+  background: var(--white);
+  color: var(--title);
+}
+
+.countdownButtonActive:not(:disabled):hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+.countdownButton:disabled {
+  background: var(--white);
+  color: var(--text);
+  cursor: not-allowed;
 }

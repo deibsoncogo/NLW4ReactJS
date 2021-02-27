@@ -76,3 +76,8 @@ Criar um arquivo para cada item da nova aplicação é muito bom pois deixar a t
 Para solucionar o problema acima temos a `API de contextos do React`, isso serve para criar um ponto de comunicação entre vários componentes da nossa aplicação
 
 >24/02/2021
+
+## Aula 04 - Melhorando a usabilidade da aplicação
+>Na quarta aula iremos continuar evoluindo nossa aplicação, aprender ainda mais sobre a Context API, e aprender a como utilizar as notificações e sons do navegador para melhorar a experiência do usuário
+
+Nesta aula usamos alguns recursos nativos do React como a criação de uma notificação e play de um áudio, existe diversas ferramentas nativas onde algumas precisa de permissão do navegador

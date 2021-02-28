@@ -1,6 +1,8 @@
 .experienceBar {
   display: flex; /* ATIVA O FLEX BOX */
   align-items: center; /* ALINHA VERTICALMENTE */
+
+  margin-bottom: 20px;
 }
 
 .experienceBar span {

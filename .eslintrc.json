@@ -22,6 +22,8 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "react/no-unused-prop-types": "off",
+    "react/destructuring-assignment": "off",
     "no-new": "off",
     "no-restricted-properties": "off",
     "jsx-a11y/alt-text": "off",

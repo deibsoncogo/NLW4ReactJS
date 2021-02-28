@@ -25,7 +25,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge } = useContext(ChallengesContext);
 
   // vamos controlar o tempo em segundos
-  const [time, setTime] = useState(0.05 * 60);
+  const [time, setTime] = useState(25 * 60);
 
   // para informar se a contagem esta em andamento
   const [isActive, setIsActine] = useState(false);
@@ -47,7 +47,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     clearTimeout(countdownTimeout);
     setIsActine(false);
     setHasFinished(false);
-    setTime(0.05 * 60);
+    setTime(25 * 60);
   }
 
   useEffect(() => {

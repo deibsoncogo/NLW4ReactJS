@@ -81,3 +81,61 @@ Para solucionar o problema acima temos a `API de contextos do React`, isso serve
 >Na quarta aula iremos continuar evoluindo nossa aplicação, aprender ainda mais sobre a Context API, e aprender a como utilizar as notificações e sons do navegador para melhorar a experiência do usuário
 
 Nesta aula usamos alguns recursos nativos do React como a criação de uma notificação e play de um áudio, existe diversas ferramentas nativas onde algumas precisa de permissão do navegador
+
+## Aula 05 - Próximo nível com React
+>Nessa última aula entendermos os próximos passos para avançar nos aprendizados com React com dicas de ferramentas, bibliotecas e conceitos a serem estudados. Também incrementaremos nossa aplicação com algumas features adicionais a fim de mostrar como aplicar esses próximos passos dentro do app desenvolvido na semana
+
+O conhecimento profundo das ferramentas não é fundamental no começo, primeiro devemos aprender a codar e depois descobrir como as coisas funcionam por trás dos panos
+
+Para salvar as informações do usuário iremos usar a metodologia de `cookies` onde ele é melhor que o `local storage` pois conseguimos definir se aquela informação pode ser acessada por mais de um domínio, definir um prazo de validade e muito mais
+
+A melhor dependência para criar armazenamento de cookies é a `JS Cookie`
+````
+yarn add js-cookie
+yarn add @types/js-cookie -D
+````
+
+Para realizar o deploy da nossa aplicação front-end, colocar no ar, temos dois serviços muito bom e famoso onde é o [Netlify](https://www.netlify.com/) e o [Vercel](https://vercel.com/) que será este que iremos usar, ambos possui um plano gratuito com uma limitação de banda em 100gb
+
+Depois temos que instalar a `CLI da Vercel` em forma global
+````
+yarn global add vercel
+````
+
+Agora temos que realizar nosso login
+````
+vercel login
+````
+
+Agora dentro da nossa aplicação utilizamos este comando para enviar nossa aplicação
+````
+vercel
+````
+
+E respondemos algumas perguntas
+````
+Se desejamos criar um setup para poder enviar nossa aplicação
+? Set up and deploy “~\Estudo\Rocketseat\Next Level Week\NLW4\React JS\NLW4ReactJS”? [Y/n] y
+
+Para qual conta desejamos enviar
+? Which scope do you want to deploy to? Deibson Cogo
+
+Se já possuo o projeto criado no site da Vercel
+? Link to existing project? [y/N] n
+
+O nome dele onde também será o mesmo para o caminho
+? What’s your project’s name? nlw4reactjs
+
+Como já executamos o comando na pasta da aplicação é só apertar enter
+? In which directory is your code located? ./
+
+Se desejamos alterar alguma configuração padrão da aplicação
+? Want to override the settings? [y/N] n
+````
+
+Ao reenviar nossa aplicação o `Vercel` por padrão vai criar uma versão teste para ser testada antes de mandar para a web, para realizar o envio sem testes temos este comando
+````
+vercel --prod
+````
+
+>26/02/2021

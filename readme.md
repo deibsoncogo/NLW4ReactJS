@@ -1,5 +1,5 @@
 # Rocketseat - Next Level Week 4 - Trilha React JS
-Neste curso iremos aprender tudo sobre o **React JS** desenvolvendo um programa com a metodologia de front-end, um exemplo simples seria criar um site como uma plataforma de venda e entre outros e o React será tudo aquilo que o usuário ve
+Neste curso iremos aprender a utilizar o **React JS**, **Node JS**, **Next JS** e **JavaScript** com **TypeScript** para desenvolver um programa com a metodologia de front-end, o projeto será a criação de um site com a ferramenta conhecida como **Pomodoro** onde no final o usuário terá que realizar um desafio para ganhar experiencia
 
 >Se o seu objetivo está alinhado com o front-end, e você deseja construir interfaces modernas e reativas na web utilizando uma biblioteca modular e escalável, essa trilha é para você
 
@@ -81,6 +81,8 @@ Para solucionar o problema acima temos a `API de contextos do React`, isso serve
 >Na quarta aula iremos continuar evoluindo nossa aplicação, aprender ainda mais sobre a Context API, e aprender a como utilizar as notificações e sons do navegador para melhorar a experiência do usuário
 
 Nesta aula usamos alguns recursos nativos do React como a criação de uma notificação e play de um áudio, existe diversas ferramentas nativas onde algumas precisa de permissão do navegador
+
+>25/02/2021
 
 ## Aula 05 - Próximo nível com React
 >Nessa última aula entendermos os próximos passos para avançar nos aprendizados com React com dicas de ferramentas, bibliotecas e conceitos a serem estudados. Também incrementaremos nossa aplicação com algumas features adicionais a fim de mostrar como aplicar esses próximos passos dentro do app desenvolvido na semana

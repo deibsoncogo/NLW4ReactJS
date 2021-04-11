@@ -6,7 +6,7 @@ import styles from "../styles/components/ExperienceBar.module.css";
 export function ExperienceBar() {
   const { currentExperience, experienceToNextLevel, level } = useContext(ChallengesContext);
 
-  const experienceToPreviousLevel = Math.pow(level * 4, 2);
+  const experienceToPreviousLevel = level === 1 ? 0 : Math.pow(level * 4, 2);
   const differenceExpToNextToPreviousLevel = experienceToNextLevel - experienceToPreviousLevel;
   const resto = currentExperience - experienceToPreviousLevel;
 

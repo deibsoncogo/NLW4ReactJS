@@ -51,22 +51,18 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
   }, []);
 
   useEffect(() => {
-    axios.get("/api/receive").then((response) => {
-      const levelDB = response.data.level;
-      const currentExpDB = response.data.currentExperience;
-      const challengesComDB = response.data.challengesCompleted;
-
-      if (levelDB || currentExpDB || challengesComDB) {
-        level < levelDB ? setLevel(levelDB) : "";
-        currentExperience < currentExpDB ? setCurrentExperience(currentExpDB) : "";
-        challengesCompleted < challengesComDB ? setChallengesCompleted(challengesComDB) : "";
-      }
-
-      axios.post("/api/submit", {
+    (async () => {
+      const responseDB = await axios.post("/api/backend", {
         email: "deibsoncogo@outlook.com",
         level, currentExperience, challengesCompleted,
       });
-    });
+
+      const DB = responseDB.data;
+
+      setLevel(DB.level);
+      setCurrentExperience(DB.currentExperience);
+      setChallengesCompleted(DB.challengesCompleted);
+    })();
 
     Cookies.set("level", String(level));
     Cookies.set("currentExperience", String(currentExperience));

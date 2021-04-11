@@ -2,6 +2,7 @@ import {
   createContext, useState, ReactNode, useEffect,
 } from "react";
 import Cookies from "js-cookie";
+import axios from "axios";
 import challenges from "../../challenges.json";
 import { LevelUpModal } from "../components/LevelUpModal";
 
@@ -50,6 +51,23 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
   }, []);
 
   useEffect(() => {
+    axios.get("/api/receive").then((response) => {
+      const levelDB = response.data.level;
+      const currentExpDB = response.data.currentExperience;
+      const challengesComDB = response.data.challengesCompleted;
+
+      if (levelDB || currentExpDB || challengesComDB) {
+        level < levelDB ? setLevel(levelDB) : "";
+        currentExperience < currentExpDB ? setCurrentExperience(currentExpDB) : "";
+        challengesCompleted < challengesComDB ? setChallengesCompleted(challengesComDB) : "";
+      }
+
+      axios.post("/api/submit", {
+        email: "deibsoncogo@outlook.com",
+        level, currentExperience, challengesCompleted,
+      });
+    });
+
     Cookies.set("level", String(level));
     Cookies.set("currentExperience", String(currentExperience));
     Cookies.set("challengesCompleted", String(challengesCompleted));

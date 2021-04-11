@@ -22,6 +22,8 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "no-unused-expressions": "off",
+    "object-property-newline": "off",
     "react/no-unused-prop-types": "off",
     "react/destructuring-assignment": "off",
     "no-new": "off",

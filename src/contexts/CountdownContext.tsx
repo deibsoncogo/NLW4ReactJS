@@ -24,8 +24,12 @@ let countdownTimeout: NodeJS.Timeout;
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge } = useContext(ChallengesContext);
 
+  // converte os minutos em segundos
+  // const durationConverted = (durationConverted);
+  const durationConverted = (1);
+
   // vamos controlar o tempo em segundos
-  const [time, setTime] = useState(25 * 60);
+  const [time, setTime] = useState(durationConverted);
 
   // para informar se a contagem esta em andamento
   const [isActive, setIsActine] = useState(false);
@@ -47,7 +51,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     clearTimeout(countdownTimeout);
     setIsActine(false);
     setHasFinished(false);
-    setTime(25 * 60);
+    setTime(durationConverted);
   }
 
   useEffect(() => {

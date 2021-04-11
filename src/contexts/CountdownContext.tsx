@@ -65,6 +65,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       setIsActine(false);
       startNewChallenge();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, time]);
 
   return (

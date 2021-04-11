@@ -25,8 +25,8 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge } = useContext(ChallengesContext);
 
   // converte os minutos em segundos
-  // const durationConverted = (durationConverted);
-  const durationConverted = (1);
+  const durationConverted = (25 * 60);
+  // const durationConverted = (1);
 
   // vamos controlar o tempo em segundos
   const [time, setTime] = useState(durationConverted);

@@ -84,11 +84,14 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
     setActiveChallenge(challenge);
 
-    new Audio("/notification.mp3").play();
+    // new Audio("/notification.mp3").play();
 
     // envia uma notificação se existir uma permissão
     if (Notification.permission === "granted") {
-      new Notification("Novo desafio 🎉", { body: `Valendo ${challenge.amount}xp!` });
+      new Notification("Novo desafio disponível 🎉", {
+        body: `Ele está valendo ${challenge.amount}xp!`,
+        icon: "./favicon.png",
+      });
     }
   }
 

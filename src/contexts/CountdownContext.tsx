@@ -1,5 +1,5 @@
 import {
-  createContext, ReactNode, useContext, useEffect, useState,
+  createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState,
 } from "react";
 import { ChallengesContext } from "./ChallengesContext";
 
@@ -10,6 +10,10 @@ interface CountdownContextData {
   isActive: boolean;
   startCountdown: () => void;
   resetCountdown: () => void;
+  isBreak: boolean;
+  setIsBreak: Dispatch<SetStateAction<boolean>>;
+  timeBreak: number;
+  setTime: Dispatch<SetStateAction<number>>;
 }
 
 interface CountdownProviderProps {
@@ -22,17 +26,18 @@ export const CountdownContext = createContext({} as CountdownContextData);
 let countdownTimeout: NodeJS.Timeout;
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
-  const { startNewChallenge } = useContext(ChallengesContext);
+  const { startNewChallenge, isBreak, setIsBreak } = useContext(ChallengesContext);
 
   // converte os minutos em segundos
-  const durationConverted = (25 * 60);
-  // const durationConverted = (1);
+  // const timeNormal = 2, timeBreak = 2;
+  const timeNormal = (25 * 60), timeBreak = (5 * 60);
+  const durationConverted = isBreak ? timeBreak : timeNormal;
 
   // vamos controlar o tempo em segundos
   const [time, setTime] = useState(durationConverted);
 
   // para informar se a contagem esta em andamento
-  const [isActive, setIsActine] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   // avisar se chegou ao final de um ciclo
   const [hasFinished, setHasFinished] = useState(false);
@@ -44,14 +49,24 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const seconds = time % 60;
 
   function startCountdown() {
-    setIsActine(true);
+    setIsActive(true);
   }
 
   function resetCountdown() {
     clearTimeout(countdownTimeout);
-    setIsActine(false);
+    setIsActive(false);
     setHasFinished(false);
-    setTime(durationConverted);
+    setIsBreak(false);
+    setTime(timeNormal);
+  }
+
+  function createNotificationBreak() {
+    if (Notification.permission === "granted") {
+      new Notification("Seu intervalo terminou 😁", {
+        body: "Bora focar mais um pouco?",
+        icon: "./favicon.png",
+      });
+    }
   }
 
   useEffect(() => {
@@ -61,9 +76,15 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         setTime(time - 1);
       }, 1000);
     } else if (isActive && time === 0) {
-      setHasFinished(true);
-      setIsActine(false);
-      startNewChallenge();
+      if (isBreak) {
+        setIsBreak(false);
+        resetCountdown();
+        createNotificationBreak();
+      } else {
+        setHasFinished(true);
+        startNewChallenge();
+      }
+      setIsActive(false);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, time]);
@@ -76,6 +97,10 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       isActive,
       startCountdown,
       resetCountdown,
+      isBreak,
+      setIsBreak,
+      timeBreak,
+      setTime,
     }}
     >
       {children}

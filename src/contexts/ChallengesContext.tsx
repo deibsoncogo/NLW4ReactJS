@@ -1,5 +1,5 @@
 import {
-  createContext, useState, ReactNode, useEffect,
+  createContext, useState, ReactNode, useEffect, Dispatch, SetStateAction,
 } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -23,6 +23,8 @@ interface ChallengesContextData {
   resetChallenge: () => void;
   completeChallenge: () => void;
   closeLevelUpModal: () => void;
+  isBreak: boolean;
+  setIsBreak: Dispatch<SetStateAction<boolean>>;
 }
 
 interface ChallengesProviderProps {
@@ -41,6 +43,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModelOpen, setIsLevelUpModelOpen] = useState(false);
+  const [isBreak, setIsBreak] = useState(false);
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
@@ -71,7 +74,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
   function levelUp() {
     setLevel(level + 1);
-    setIsLevelUpModelOpen(true);
+    // setIsLevelUpModelOpen(true);
   }
 
   function closeLevelUpModal() {
@@ -131,6 +134,8 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
       resetChallenge,
       completeChallenge,
       closeLevelUpModal,
+      isBreak,
+      setIsBreak,
     }}
     >
       {children}

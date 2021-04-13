@@ -4,7 +4,7 @@ import styles from "../styles/components/Countdown.module.css";
 
 export function Countdown() {
   const {
-    minutes, seconds, hasFinished, isActive, startCountdown, resetCountdown,
+    minutes, seconds, hasFinished, isActive, startCountdown, resetCountdown, isBreak,
   } = useContext(CountdownContext);
 
   // vai converter em string com dois dígitos e criar um array
@@ -44,7 +44,7 @@ export function Countdown() {
               onClick={resetCountdown}
               className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
             >
-              Abandonar ciclo
+              {isBreak ? "Abandonar intervalo" : "Abandonar ciclo"}
             </button>
           ) : (
             <button
@@ -52,7 +52,7 @@ export function Countdown() {
               onClick={startCountdown}
               className={styles.countdownButton}
             >
-              Iniciar ciclo
+              {isBreak ? "Iniciar intervalo" : "Iniciar ciclo"}
             </button>
           )}
         </>

@@ -14,6 +14,7 @@ interface CountdownContextData {
   setIsBreak: Dispatch<SetStateAction<boolean>>;
   timeBreak: number;
   setTime: Dispatch<SetStateAction<number>>;
+  createNotificationBreak: (deleteNotification: boolean) => void;
 }
 
 interface CountdownProviderProps {
@@ -48,8 +49,21 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   // % pega o resto da divisão
   const seconds = time % 60;
 
+  function createNotificationBreak(deleteNotification: boolean) {
+    if (Notification.permission === "granted") {
+      const notification = new Notification("Seu intervalo terminou 😁", {
+        tag: "notificationBreak",
+        body: "Bora focar mais um pouco?",
+        icon: "./favicon.png",
+      });
+
+      deleteNotification && setTimeout(notification.close.bind(notification), 500);
+    }
+  }
+
   function startCountdown() {
     setIsActive(true);
+    createNotificationBreak(true);
   }
 
   function resetCountdown() {
@@ -58,15 +72,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setHasFinished(false);
     setIsBreak(false);
     setTime(timeNormal);
-  }
-
-  function createNotificationBreak() {
-    if (Notification.permission === "granted") {
-      new Notification("Seu intervalo terminou 😁", {
-        body: "Bora focar mais um pouco?",
-        icon: "./favicon.png",
-      });
-    }
   }
 
   useEffect(() => {
@@ -79,7 +84,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       if (isBreak) {
         setIsBreak(false);
         resetCountdown();
-        createNotificationBreak();
+        createNotificationBreak(false);
       } else {
         setHasFinished(true);
         startNewChallenge();
@@ -101,6 +106,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       setIsBreak,
       timeBreak,
       setTime,
+      createNotificationBreak,
     }}
     >
       {children}

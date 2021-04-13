@@ -6,7 +6,8 @@ import styles from "../styles/components/ChallengeBox.module.css";
 
 export function ChallengeBox() {
   const {
-    activeChallenge, resetChallenge, completeChallenge, isBreak, setIsBreak,
+    activeChallenge, resetChallenge, completeChallenge,
+    isBreak, setIsBreak, createNotificationChallenge,
   } = useContext(ChallengesContext);
 
   const { resetCountdown, timeBreak, setTime } = useContext(CountdownContext);
@@ -16,11 +17,13 @@ export function ChallengeBox() {
     resetCountdown();
     setIsBreak(true);
     setTime(timeBreak);
+    createNotificationChallenge(true);
   }
 
   function handleChallengeFailed() {
     resetChallenge();
     resetCountdown();
+    createNotificationChallenge(true);
   }
 
   return (

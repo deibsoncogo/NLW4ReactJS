@@ -25,6 +25,7 @@ interface ChallengesContextData {
   closeLevelUpModal: () => void;
   isBreak: boolean;
   setIsBreak: Dispatch<SetStateAction<boolean>>;
+  createNotificationChallenge: (deleteNotification: boolean) => void;
 }
 
 interface ChallengesProviderProps {
@@ -72,6 +73,22 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     Cookies.set("challengesCompleted", String(challengesCompleted));
   }, [level, currentExperience, challengesCompleted]);
 
+  function createNotificationChallenge(deleteNotification: boolean) {
+    // new Audio("/notification.mp3").play();
+
+    // envia uma notificação se existir uma permissão
+    if (Notification.permission === "granted") {
+      const notification = new Notification("Novo desafio disponível 🎉", {
+        tag: "notificationChallenge",
+        body: "Complete para ganhar xp!",
+        icon: "./favicon.png",
+      });
+
+      // verifica se deve excluir a notificação
+      deleteNotification && setTimeout(notification.close.bind(notification), 500);
+    }
+  }
+
   function levelUp() {
     setLevel(level + 1);
     // setIsLevelUpModelOpen(true);
@@ -86,16 +103,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     const challenge = challenges[randomChallengeIndex];
 
     setActiveChallenge(challenge);
-
-    // new Audio("/notification.mp3").play();
-
-    // envia uma notificação se existir uma permissão
-    if (Notification.permission === "granted") {
-      new Notification("Novo desafio disponível 🎉", {
-        body: `Ele está valendo ${challenge.amount}xp!`,
-        icon: "./favicon.png",
-      });
-    }
+    createNotificationChallenge(false);
   }
 
   function resetChallenge() {
@@ -136,6 +144,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
       closeLevelUpModal,
       isBreak,
       setIsBreak,
+      createNotificationChallenge,
     }}
     >
       {children}

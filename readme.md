@@ -13,16 +13,16 @@ O **JSON** é entendido por todo tipo de sistema onde ele significa **JavaScript
 Iremos usar o **TypeScript** no desenvolvimento da aplicação para assim poder criar uma tipagem estática, a tipagem é informar um campos que existem em um objeto e seu formato, isso nos ajuda muito na manutenção do projeto
 
 Para criar os arquivos base básico da nossa aplicação com TypeScript usamos um destes comandos, no comando o nome da aplicação  deve ter somente letras minúsculas e números, se o caminho conter espaços o comando do Yarn não vai funcionar, este comando vai nos trazer vários arquivos que não iremos utilizar com isso iremos excluir eles
-````
+```bash
 yarn create react-app nlw4reactjs --template=typescript
 npx create-react-app nlw4reactjs --template=typescript
-````
+```
 
 Para iniciar o projeto devemos usar o comando abaixo ou seu atalho com o Yarn neste caso
-````
+```bash
 yarn react-scripts start
 yarn start
-````
+```
 
 **JSX** é a utilização do JavaScript dentro do HTML
 
@@ -42,21 +42,21 @@ O **SSR** que significa `Server-side Rendering` é um servidor que o Next JS cri
 O **SSG** que significa `Static Site Generation` onde também é do Next JS onde com ele conseguimos configurar para criar backup se certas páginas assim evitando que o back-end sejá acessado muitas vezes, isso é muito util em um site que recebe milhos de acesso
 
 Para criar um projeto assim usamos o seguinte comando
-````
+```bash
 yarn create next-app nlw4reactjs
 npx create-next-app nlw4reactjs
-````
+```
 
 Agora iremos adicionar o TypeScript ao Next JS
-````
+```bash
 yarn add typescript @types/react @types/react-dom @types/node -D
-````
+```
 
 Para executar o servidor devemos usar outro comando ou seu atalho, temos também o atalho `start` mais ele realiza a conversão do TypeScript para o JavaScript compatível com o navegador
-````
+```bash
 yarn next dev
 yarn dev
-````
+```
 
 No Next não podemos mexer diretamente no arquivo index.html que fica na pasta public, aqui ele nem aparece para nos, com isso temos que criar um arquivo chamado de `_document.tsx` e dentro dele criar um index que vai sobre escrever o original
 
@@ -92,30 +92,30 @@ O conhecimento profundo das ferramentas não é fundamental no começo, primeiro
 Para salvar as informações do usuário iremos usar a metodologia de `cookies` onde ele é melhor que o `local storage` pois conseguimos definir se aquela informação pode ser acessada por mais de um domínio, definir um prazo de validade e muito mais
 
 A melhor dependência para criar armazenamento de cookies é a `JS Cookie`
-````
+```bash
 yarn add js-cookie
 yarn add @types/js-cookie -D
-````
+```
 
 Para realizar o deploy da nossa aplicação front-end, colocar no ar, temos dois serviços muito bom e famoso onde é o [Netlify](https://www.netlify.com/) e o [Vercel](https://vercel.com/) que será este que iremos usar, ambos possui um plano gratuito com uma limitação de banda em 100gb
 
 Depois temos que instalar a `CLI da Vercel` em forma global
-````
+```bash
 yarn global add vercel
-````
+```
 
 Agora temos que realizar nosso login
-````
+```bash
 vercel login
-````
+```
 
 Agora dentro da nossa aplicação utilizamos este comando para enviar nossa aplicação
-````
+```bash
 vercel
-````
+```
 
 E respondemos algumas perguntas
-````
+```
 Se desejamos criar um setup para poder enviar nossa aplicação
 ? Set up and deploy “~\Estudo\Rocketseat\Next Level Week\NLW4\React JS\NLW4ReactJS”? [Y/n] y
 
@@ -133,11 +133,11 @@ Como já executamos o comando na pasta da aplicação é só apertar enter
 
 Se desejamos alterar alguma configuração padrão da aplicação
 ? Want to override the settings? [y/N] n
-````
+```
 
 Ao reenviar nossa aplicação o `Vercel` por padrão vai criar uma versão teste para ser testada antes de mandar para a web, para realizar o envio sem testes temos este comando
-````
+```bash
 vercel --prod
-````
+```
 
 >26/02/2021

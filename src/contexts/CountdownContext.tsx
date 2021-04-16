@@ -51,6 +51,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   function startCountdown() {
     setIsActive(true);
+    createNotification(false);
   }
 
   function resetCountdown() {

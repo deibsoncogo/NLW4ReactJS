@@ -30,8 +30,8 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge, isBreak, setIsBreak } = useContext(ChallengesContext);
 
   // converte os minutos em segundos
-  const timeNormal = 3, timeBreak = 2;
-  // const timeNormal = (25 * 60), timeBreak = (5 * 60);
+  // const timeNormal = 3, timeBreak = 2;
+  const timeNormal = (25 * 60), timeBreak = (5 * 60);
   const durationConverted = isBreak ? timeBreak : timeNormal;
 
   // vamos controlar o tempo em segundos

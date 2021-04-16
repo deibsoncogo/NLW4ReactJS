@@ -3,11 +3,11 @@ import { ChallengesContext } from "../contexts/ChallengesContext";
 import { CountdownContext } from "../contexts/CountdownContext";
 
 import styles from "../styles/components/ChallengeBox.module.css";
+// import { createNotification } from "./Notification";
 
 export function ChallengeBox() {
   const {
-    activeChallenge, resetChallenge, completeChallenge,
-    isBreak, setIsBreak, createNotificationChallenge,
+    activeChallenge, resetChallenge, completeChallenge, isBreak, setIsBreak,
   } = useContext(ChallengesContext);
 
   const { resetCountdown, timeBreak, setTime } = useContext(CountdownContext);
@@ -17,13 +17,13 @@ export function ChallengeBox() {
     resetCountdown();
     setIsBreak(true);
     setTime(timeBreak);
-    createNotificationChallenge(true);
+    // createNotification(false);
   }
 
   function handleChallengeFailed() {
     resetChallenge();
     resetCountdown();
-    createNotificationChallenge(true);
+    // createNotification(false);
   }
 
   return (

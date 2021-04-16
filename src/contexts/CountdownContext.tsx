@@ -2,6 +2,7 @@ import {
   createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState,
 } from "react";
 import { ChallengesContext } from "./ChallengesContext";
+import { createNotification } from "../components/Notification";
 
 interface CountdownContextData {
   minutes: number;
@@ -14,7 +15,6 @@ interface CountdownContextData {
   setIsBreak: Dispatch<SetStateAction<boolean>>;
   timeBreak: number;
   setTime: Dispatch<SetStateAction<number>>;
-  createNotificationBreak: (deleteNotification: boolean) => void;
 }
 
 interface CountdownProviderProps {
@@ -30,8 +30,8 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge, isBreak, setIsBreak } = useContext(ChallengesContext);
 
   // converte os minutos em segundos
-  // const timeNormal = 2, timeBreak = 2;
-  const timeNormal = (25 * 60), timeBreak = (5 * 60);
+  const timeNormal = 3, timeBreak = 2;
+  // const timeNormal = (25 * 60), timeBreak = (5 * 60);
   const durationConverted = isBreak ? timeBreak : timeNormal;
 
   // vamos controlar o tempo em segundos
@@ -49,21 +49,8 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   // % pega o resto da divisão
   const seconds = time % 60;
 
-  function createNotificationBreak(deleteNotification: boolean) {
-    if (Notification.permission === "granted") {
-      const notification = new Notification("Seu intervalo terminou 😁", {
-        tag: "notificationBreak",
-        body: "Bora focar mais um pouco?",
-        icon: "./favicon.png",
-      });
-
-      deleteNotification && setTimeout(notification.close.bind(notification), 500);
-    }
-  }
-
   function startCountdown() {
     setIsActive(true);
-    createNotificationBreak(true);
   }
 
   function resetCountdown() {
@@ -84,7 +71,11 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       if (isBreak) {
         setIsBreak(false);
         resetCountdown();
-        createNotificationBreak(false);
+        createNotification(
+          true,
+          "Seu intervalo terminou 😁",
+          "Bora focar mais um pouco?",
+        );
       } else {
         setHasFinished(true);
         startNewChallenge();
@@ -106,7 +97,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       setIsBreak,
       timeBreak,
       setTime,
-      createNotificationBreak,
     }}
     >
       {children}

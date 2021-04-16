@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import challenges from "../../challenges.json";
 import { LevelUpModal } from "../components/LevelUpModal";
+import { createNotification } from "../components/Notification";
 
 interface Challenge {
   type: "body" | "eye";
@@ -25,7 +26,6 @@ interface ChallengesContextData {
   closeLevelUpModal: () => void;
   isBreak: boolean;
   setIsBreak: Dispatch<SetStateAction<boolean>>;
-  createNotificationChallenge: (deleteNotification: boolean) => void;
 }
 
 interface ChallengesProviderProps {
@@ -73,22 +73,6 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     Cookies.set("challengesCompleted", String(challengesCompleted));
   }, [level, currentExperience, challengesCompleted]);
 
-  function createNotificationChallenge(deleteNotification: boolean) {
-    // new Audio("/notification.mp3").play();
-
-    // envia uma notificação se existir uma permissão
-    if (Notification.permission === "granted") {
-      const notification = new Notification("Novo desafio disponível 🎉", {
-        tag: "notificationChallenge",
-        body: "Complete para ganhar xp!",
-        icon: "./favicon.png",
-      });
-
-      // verifica se deve excluir a notificação
-      deleteNotification && setTimeout(notification.close.bind(notification), 500);
-    }
-  }
-
   function levelUp() {
     setLevel(level + 1);
     // setIsLevelUpModelOpen(true);
@@ -103,7 +87,12 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     const challenge = challenges[randomChallengeIndex];
 
     setActiveChallenge(challenge);
-    createNotificationChallenge(false);
+
+    createNotification(
+      true,
+      "Novo desafio disponível 🎉",
+      `Complete para ganhar ${challenge.amount}xp!`,
+    );
   }
 
   function resetChallenge() {
@@ -144,7 +133,6 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
       closeLevelUpModal,
       isBreak,
       setIsBreak,
-      createNotificationChallenge,
     }}
     >
       {children}

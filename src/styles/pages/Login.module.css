@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  height: 100vh;
+
+  background: var(--blue);
+}
+
+.logo {
+  max-height: 95vh;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-right: 5rem;
+}
+
+.login strong {
+  margin-top: 5rem;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.instructions {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.instructions p {
+  margin-left: 1rem;
+  color: var(--text-azul);
+  white-space: nowrap;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.buttons input {
+  height: 3rem;
+  /* background-color: var(--blue-dark); */
+  background-color: transparent;
+  background-image: linear-gradient(to right, var(--blue-dark) 20%, #4953B820);
+
+  border: 2px solid var(--blue-dark);
+  border-right: 0;
+  border-radius: 0.3rem 0 0 0.3rem;
+
+  width: 18rem;
+
+  padding-left: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-azul);
+}
+
+.buttons input::placeholder {
+  color: var(--text-azul);
+}
+
+.buttons button {
+  display: flex;
+  font-size: 0;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid var(--blue-dark);
+  border-left: 0;
+  border-radius: 0 0.3rem 0.3rem 0;
+
+  height: 3rem;
+  width: 3rem;
+
+  background-color: var(--blue-dark);
+
+  transition: filter(0.2s);
+}
+
+.buttons button:hover {
+  filter: brightness(0.9);
+}
+
+.error {
+  margin-top: 0.5rem;
+  margin-left: 0.3rem;
+
+  font-size: 0.9rem;
+  color: yellow;
+}
+
+#error {
+  border-color: yellow;
+}

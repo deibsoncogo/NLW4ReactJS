@@ -1,3 +1,7 @@
+.containerGeral {
+  display: flex;
+}
+
 .container {
   height: 100vh; /* faz ter o tamanho exato máximo de altura */
   max-width: 992px; /* tamanho máximo */

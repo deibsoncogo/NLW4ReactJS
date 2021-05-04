@@ -45,10 +45,10 @@ export default function Login({ ...rest }) {
       Cookies.set("currentExperience", String(DB.currentExperience));
       Cookies.set("challengesCompleted", String(DB.challengesCompleted));
 
+      router.push("/home");
+
       setLogin("");
       setError("");
-
-      setTimeout(() => { router.push("/home"); }, 1000);
     } catch (err) {
       setError("Este login não existe no Github!");
     }

@@ -3,7 +3,7 @@ import { componentToDatabase } from "./component";
 
 export default async (request: NowRequest, response: NowResponse) => {
   let { level, currentExperience, challengesCompleted } = request.body;
-  const { email } = request.body;
+  const { login, name, avatar_url } = request.body;
 
   // chama outra função para criar a conexão com o DB
   const db = await componentToDatabase(process.env.mongoDbUrl);
@@ -12,9 +12,9 @@ export default async (request: NowRequest, response: NowResponse) => {
   const collection = db.collection("experience");
 
   // busca os dados da tabela e DB selecionado anteriormente
-  const received = await collection.findOne({ email }, {});
+  const received = await collection.findOne({ login }, {});
 
-  if (received && received.email === email) { // vai verificar qual informação é maior e salvar
+  if (received && received.login === login) { // vai verificar qual informação é maior e salvar
     level = level >= received.level
       ? level
       : received.level;
@@ -33,13 +33,13 @@ export default async (request: NowRequest, response: NowResponse) => {
   }
 
   // envia os dados para a tabela e DB selecionado anteriormente
-  await collection.findOneAndUpdate({ email }, {
+  await collection.findOneAndUpdate({ login }, {
     $set: {
-      email, level, currentExperience, challengesCompleted,
+      login, name, avatar_url, level, currentExperience, challengesCompleted,
     },
   }, { upsert: true }); // permite criar os dados caso não encontre
 
   return response.status(201).send({
-    email, level, currentExperience, challengesCompleted,
+    login, name, avatar_url, level, currentExperience, challengesCompleted,
   });
 };

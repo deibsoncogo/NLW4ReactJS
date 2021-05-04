@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import Head from "next/head";
 import styles from "../styles/pages/Login.module.css";
 import ApiGithub from "./api/apiGithub";
 
@@ -9,54 +12,54 @@ interface UserProps {
   avatar_url: string;
 }
 
-export default function Login() {
+export default function Login({ ...rest }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (rest.name !== "undefined") {
+      router.push("/home");
+    }
+  }, [router, rest.name]);
+
   const [login, setLogin] = useState("");
   const [error, setError] = useState("");
 
   async function handleLogar(): Promise<void> {
     if (!login) {
-      setError("Utilize seu nome ou o login do Github!");
+      setError("Utilize seu login do Github!");
       return;
     }
 
     try {
-      const response = await ApiGithub.get<UserProps>(`users/${login}`);
-      const user = response.data;
+      const responseGithub = await ApiGithub.get<UserProps>(`/users/${login}`);
+      const { name, avatar_url } = responseGithub.data;
 
-      (async () => {
-        const responseDB = await axios.post("/api/backend", { email: user.name });
+      const responseDB = await axios.post("/api/backend", { login, name, avatar_url });
 
-        const DB = responseDB.data;
+      const DB = responseDB.data;
 
-        Cookies.set("level", String(DB.level));
-        Cookies.set("currentExperience", String(DB.currentExperience));
-        Cookies.set("challengesCompleted", String(DB.challengesCompleted));
-        Cookies.set("name", String(user.name));
-        Cookies.set("avatar_url", String(user.avatar_url));
-      })();
+      Cookies.set("login", String(DB.login));
+      Cookies.set("name", String(DB.name));
+      Cookies.set("avatar_url", String(DB.avatar_url));
+      Cookies.set("level", String(DB.level));
+      Cookies.set("currentExperience", String(DB.currentExperience));
+      Cookies.set("challengesCompleted", String(DB.challengesCompleted));
 
       setLogin("");
       setError("");
+
+      setTimeout(() => { router.push("/home"); }, 1000);
     } catch (err) {
-      (async () => {
-        const responseDB = await axios.post("/api/backend", { email: login });
-
-        const DB = responseDB.data;
-
-        Cookies.set("level", String(DB.level));
-        Cookies.set("currentExperience", String(DB.currentExperience));
-        Cookies.set("challengesCompleted", String(DB.challengesCompleted));
-        Cookies.set("name", String(login));
-        Cookies.set("avatar_url", String("https://avatars.githubusercontent.com/u/80178?v=4"));
-      })();
-
-      setLogin("");
-      setError("");
+      setError("Este login não existe no Github!");
     }
   }
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Login | move.it</title>
+      </Head>
+
       <img className={styles.logo} src="simbolo.svg" alt="Símbolo" />
 
       <div className={styles.login}>
@@ -68,14 +71,14 @@ export default function Login() {
           <img src="icons/github.svg" alt="Logo Github" />
           <div>
             <p>Utilize seu login do Github para começar</p>
-            <p>Caso contrário use seu nome para criar uma conta</p>
+            <p>A partir dele iremos recuperar seu nome e foto!</p>
           </div>
         </div>
 
         <div className={styles.buttons}>
           <input
             type="text"
-            placeholder="Digite aqui"
+            placeholder="Digite seu login"
             value={login}
             onChange={(o) => setLogin(o.target.value)}
             id={error && styles.error}
@@ -90,3 +93,9 @@ export default function Login() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { name } = ctx.req.cookies;
+
+  return { props: { name: String(name) } };
+};

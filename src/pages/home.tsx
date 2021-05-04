@@ -13,6 +13,9 @@ import { CountdownProvider } from "../contexts/CountdownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 
 interface HomeProps {
+  login: string;
+  name: string;
+  avatar_url: string;
   level: number;
   currentExperience: number;
   challengesCompleted: number;
@@ -23,6 +26,9 @@ export default function Home(props: HomeProps) {
     <div className={styles.containerGeral}>
       {/* faz toda aplicação ter acesso aos dados */}
       <ChallengesProvider
+        login={props.login}
+        name={props.name}
+        avatar_url={props.avatar_url}
         level={props.level}
         currentExperience={props.currentExperience}
         challengesCompleted={props.challengesCompleted}
@@ -56,13 +62,18 @@ export default function Home(props: HomeProps) {
 
 // executa algo antes da aplicação
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+  const {
+    login, name, avatar_url, level, currentExperience, challengesCompleted,
+  } = ctx.req.cookies;
 
   return {
     props: {
-      level: Number(level ?? 1),
-      currentExperience: Number(currentExperience ?? 0),
-      challengesCompleted: Number(challengesCompleted ?? 0),
+      login: String(login),
+      name: String(name),
+      avatar_url: String(avatar_url),
+      level: Number(level),
+      currentExperience: Number(currentExperience),
+      challengesCompleted: Number(challengesCompleted),
     },
   };
 };

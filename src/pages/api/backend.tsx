@@ -34,7 +34,8 @@ export default async (request: NowRequest, response: NowResponse) => {
 
   // envia os dados para a tabela e DB selecionado anteriormente
   await collection.findOneAndUpdate({ login }, {
-    $set: {
+    $set:
+    {
       login, name, avatar_url, level, currentExperience, challengesCompleted,
     },
   }, { upsert: true }); // permite criar os dados caso não encontre

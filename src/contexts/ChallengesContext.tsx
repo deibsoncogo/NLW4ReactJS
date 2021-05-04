@@ -14,6 +14,9 @@ interface Challenge {
 }
 
 interface ChallengesContextData {
+  login: string;
+  name: string;
+  avatar_url: string;
   level: number;
   currentExperience: number;
   experienceToNextLevel: number;
@@ -30,6 +33,9 @@ interface ChallengesContextData {
 
 interface ChallengesProviderProps {
   children: ReactNode;
+  login: string;
+  name: string;
+  avatar_url: string;
   level: number;
   currentExperience: number;
   challengesCompleted: number;
@@ -38,6 +44,7 @@ interface ChallengesProviderProps {
 export const ChallengesContext = createContext({} as ChallengesContextData);
 
 export function ChallengesProvider({ children, ...rest }: ChallengesProviderProps) {
+  const { login } = rest, { name } = rest, { avatar_url } = rest;
   const [level, setLevel] = useState(rest.level ?? 1);
   const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0);
   const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0);
@@ -57,8 +64,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
   useEffect(() => {
     (async () => {
       const responseDB = await axios.post("/api/backend", {
-        email: "deibsoncogo@outlook.com",
-        level, currentExperience, challengesCompleted,
+        login, name, avatar_url, level, currentExperience, challengesCompleted,
       });
 
       const DB = responseDB.data;
@@ -68,10 +74,13 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
       setChallengesCompleted(DB.challengesCompleted);
     })();
 
+    Cookies.set("login", String(login));
+    Cookies.set("name", String(name));
+    Cookies.set("avatar_url", String(avatar_url));
     Cookies.set("level", String(level));
     Cookies.set("currentExperience", String(currentExperience));
     Cookies.set("challengesCompleted", String(challengesCompleted));
-  }, [level, currentExperience, challengesCompleted]);
+  }, [login, name, avatar_url, level, currentExperience, challengesCompleted]);
 
   function levelUp() {
     setLevel(level + 1);
@@ -121,6 +130,9 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
   return (
     // fazemos toda nossa aplicação ter acesso aos componentes
     <ChallengesContext.Provider value={{
+      login,
+      name,
+      avatar_url,
       level,
       currentExperience,
       experienceToNextLevel,

@@ -11,6 +11,7 @@ import { Header } from "../components/Header";
 import styles from "../styles/pages/Home.module.css";
 import { CountdownProvider } from "../contexts/CountdownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
+import IsLogado from "../utils/IsLogado";
 
 interface HomeProps {
   login: string;
@@ -22,6 +23,8 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
+  IsLogado(props.name);
+
   return (
     <div className={styles.containerGeral}>
       {/* faz toda aplicação ter acesso aos dados */}

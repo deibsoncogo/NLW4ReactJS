@@ -2,7 +2,9 @@
   width: 5rem;
   height: 100vh;
   padding: 1rem;
-  background: #ffffff;
+  background: #fffdfd;
+
+  border-right: 2px solid #f0eded;
 
   display: flex;
   flex-direction: column;
@@ -34,4 +36,13 @@
 
 .button:hover {
   filter: brightness(1.20);
+}
+
+.button .iconReact {
+  font-size: 35px;
+  color: var(--blue-dark);
+}
+
+.button .iconReact#red {
+  color: var(--red);
 }

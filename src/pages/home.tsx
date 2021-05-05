@@ -6,7 +6,7 @@ import { Countdown } from "../components/Countdown";
 import { ExperienceBar } from "../components/ExperienceBar";
 import { Profile } from "../components/Profile";
 import { ChallengeBox } from "../components/ChallengeBox";
-import { Header } from "../components/header/index";
+import { Header } from "../components/Header";
 
 import styles from "../styles/pages/Home.module.css";
 import { CountdownProvider } from "../contexts/CountdownContext";

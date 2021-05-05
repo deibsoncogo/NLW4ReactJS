@@ -5,6 +5,10 @@ export default async (request: NowRequest, response: NowResponse) => {
   let { level, currentExperience, challengesCompleted } = request.body;
   const { login, name, avatar_url } = request.body;
 
+  if (!login) { // para negar um login undefined ou nulo
+    return response.json({ error: "O login está definido como undefined ou nulo" });
+  }
+
   // chama outra função para criar a conexão com o DB
   const db = await componentToDatabase(process.env.mongoDbUrl);
 

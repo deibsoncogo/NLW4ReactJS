@@ -26,12 +26,15 @@ export default function Login({ ...rest }) {
 
   async function handleLogar(): Promise<void> {
     if (!login) {
-      setError("Utilize seu login do Github!");
+      setError("Utilize seu login do Github ou o nome da aplicação!");
       return;
     }
 
     try {
-      const responseGithub = await ApiGithub.get<UserProps>(`/users/${login}`);
+      const responseGithub = login !== "move.it"
+        ? await ApiGithub.get<UserProps>(`/users/${login}`)
+        : { data: { name: "Olá Convidado", avatar_url: "favicon.png" } };
+
       const { name, avatar_url } = responseGithub.data;
 
       const responseDB = await axios.post("/api/backend", { login, name, avatar_url });
@@ -71,14 +74,14 @@ export default function Login({ ...rest }) {
           <img src="icons/github.svg" alt="Logo Github" />
           <div>
             <p>Utilize seu login do Github para começar</p>
-            <p>A partir dele iremos recuperar seu nome e foto!</p>
+            <p>Com o nome da aplicação você loga como convidado!</p>
           </div>
         </div>
 
         <div className={styles.buttons}>
           <input
             type="text"
-            placeholder="Digite seu login"
+            placeholder="Digite seu login ou move.it"
             value={login}
             onChange={(o) => setLogin(o.target.value)}
             id={error && styles.error}

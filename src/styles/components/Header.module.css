@@ -24,6 +24,8 @@
   display: flex;
   font-size: 0;
 
+  margin-bottom: 2rem;
+
   border: 0;
   background-color: transparent;
 
@@ -31,7 +33,7 @@
 }
 
 .button:last-child {
-  margin-top: 2rem;
+  margin-bottom: 0rem;
 }
 
 .button:hover {

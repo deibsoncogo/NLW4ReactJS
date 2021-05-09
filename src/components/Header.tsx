@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { BiExit, BiHomeAlt } from "react-icons/bi";
+import { BiExit, BiHomeAlt, BiTrophy } from "react-icons/bi";
 import Cookies from "js-cookie";
 import styles from "../styles/components/Header.module.css";
 
 export function Header() {
-  function Logoff() {
+  function handleLogoff() {
     Cookies.remove("login");
     Cookies.remove("name");
     Cookies.remove("avatar_url");
@@ -24,9 +24,15 @@ export function Header() {
           </button>
         </Link>
 
+        <Link href="/top">
+          <button className={styles.button} type="button">
+            <BiTrophy className={styles.iconReact} />
+          </button>
+        </Link>
+
         <Link href="/">
           <button className={styles.button} type="button">
-            <BiExit id={styles.red} className={styles.iconReact} onClick={Logoff} />
+            <BiExit id={styles.red} className={styles.iconReact} onClick={handleLogoff} />
           </button>
         </Link>
       </div>

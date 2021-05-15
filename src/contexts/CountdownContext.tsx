@@ -51,7 +51,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   function startCountdown() {
     setIsActive(true);
-    createNotification(false);
   }
 
   function resetCountdown() {
@@ -73,7 +72,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         setIsBreak(false);
         resetCountdown();
         createNotification(
-          true,
           "Seu intervalo terminou 😁",
           "Bora focar mais um pouco?",
         );

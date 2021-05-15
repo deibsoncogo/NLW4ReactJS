@@ -98,7 +98,6 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     setActiveChallenge(challenge);
 
     createNotification(
-      true,
       "Novo desafio disponível 🎉",
       `Complete para ganhar ${challenge.amount}xp!`,
     );

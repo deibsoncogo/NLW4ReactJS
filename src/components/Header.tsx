@@ -24,11 +24,11 @@ export function Header() {
           </button>
         </Link>
 
-        <Link href="/top">
+        {/* <Link href="/top">
           <button className={styles.button} type="button">
             <BiTrophy className={styles.iconReact} />
           </button>
-        </Link>
+        </Link> */}
 
         <Link href="/">
           <button className={styles.button} type="button">
